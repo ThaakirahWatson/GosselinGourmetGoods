@@ -1,0 +1,131 @@
+/* General Page Styles */
+body {
+    background-color: #f0f8ff; /* Light blue background */
+    color: #333333; /* Dark gray text for readability */
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column; /* Center the form and text in a column */
+}
+
+h1, h2 {
+    color: #1e90ff; /* Dodger blue for headings */
+    text-align: center;
+}
+
+form {
+    background-color: #ffffff; /* White background for forms */
+    padding: 25px 30px; /* Increased padding for more space around text fields */
+    border: 1px solid #1e90ff; /* Border to match heading color */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 400px;
+    width: 90%;
+    margin: 20px auto;
+}
+
+/* Label and Input Field Styles */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 20px); /* Adjusted width to add space between text fields and form edges */
+    padding: 10px;
+    margin: 8px 0 16px 0;
+    border: 1px solid #1e90ff;
+    border-radius: 5px;
+    background-color: #f0f8ff; /* Light blue background for input fields */
+}
+
+/* Button Styles */
+button {
+    background-color: #1e90ff; /* Blue background for buttons */
+    color: white; /* White text */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #4682b4; /* Darker blue on hover */
+}
+
+/* Link Styles */
+a {
+    color: #1e90ff; /* Blue for links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Centered container for page content */
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Align the title, form, and link properly */
+.header {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 15px;
+}
+
+/* Paragraph styling */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Flexbox styling for improved layout alignment */
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flex-item {
+    margin: 10px;
+}
+
+/* Apply consistent styling to all input fields */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #007bff; /* Border color to match the button and overall theme */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #e9f2ff; /* Light blue background color for consistency */
+    color: #007bff; /* Text color to match the button and theme */
+}
+
+/* Change input fields appearance when they are focused */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border: 1px solid #0056b3; /* Darker border color on focus */
+    outline: none; /* Remove default outline */
+    background-color: #d7e6fd; /* Slightly darker background on focus */
+}
