@@ -1,27 +1,25 @@
 <?php
-require_once("aShoppingCartClass.php");
 session_start();
-
-$DBConnect = new mysqli("localhost", "root", "", "ggg");
-
-if ($DBConnect->connect_error) {
-    die("Database connection failed: " . $DBConnect->connect_error);
-}
+require_once("class_OnlineStore.php");
 
 // Process the registration form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $customerNumber = $DBConnect->real_escape_string($_POST['customerNumber']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $fullName = $_POST['fullName'];
+    $email = $_POST['email'];
+    $customerNumber = $_POST['customerNumber'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
 
-    $query = "INSERT INTO customers (customer_number, password) VALUES ('$customerNumber', '$password')";
-
-    if ($DBConnect->query($query) === TRUE) {
-        echo "<p>Registration successful! You can now <a href='login.php'>login</a>.</p>";
+    // Check if passwords match
+    if ($password !== $confirmPassword) {
+        echo "<p>Passwords do not match. Please try again.</p>";
     } else {
-        echo "<p>Error: " . $query . "<br>" . $DBConnect->error . "</p>";
+        // Call the registration method
+        $message = $onlineStore->registerUser($fullName, $email, $customerNumber, $password);
+        if ($message) {
+            echo $message; // Display message based on registration success or failure
+        }
     }
-
-    $DBConnect->close();
 }
 ?>
 
@@ -35,10 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Register - Gosselin Gourmet Goods</title>
 </head>
 <body>
-<div class="container">
+    <div class="container">
         <h1>Gosselin Gourmet Goods</h1>
         <h2>Register</h2>
-        <form action="ggg.php" method="POST">
+        <form action="login.php" method="POST">
             <label for="fullName">Full Name:</label>
             <input type="text" id="fullName" name="fullName" required>
 

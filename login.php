@@ -1,35 +1,17 @@
 <?php
-require_once("aShoppingCartClass.php");
 session_start();
-
-$DBConnect = new mysqli("localhost", "root", "", "ggg");
-
-if ($DBConnect->connect_error) {
-    die("Database connection failed: " . $DBConnect->connect_error);
-}
+require_once("class_OnlineStore.php");
 
 // Process the login form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $customerNumber = $DBConnect->real_escape_string($_POST['customerNumber']);
+    $customerNumber = $_POST['customerNumber'];
     $password = $_POST['password'];
 
-    $query = "SELECT * FROM customers WHERE customer_number = '$customerNumber'";
-    $result = $DBConnect->query($query);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        if (password_verify($password, $row['password'])) {
-            $_SESSION['customerNumber'] = $customerNumber;
-            header("Location: ggg.php"); // Redirect to the main page after successful login
-            exit();
-        } else {
-            echo "<p>Invalid password. Please try again.</p>";
-        }
-    } else {
-        echo "<p>Customer number not found. Please register first.</p>";
+    // Call the login method
+    $message = $onlineStore->loginUser($customerNumber, $password);
+    if ($message) {
+        echo $message; // Display error message if login fails
     }
-
-    $DBConnect->close();
 }
 ?>
 
@@ -44,19 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
     <div class="flex-container">
-    <h1 class="header">Gosselin Gourmet Goods</h1>
-    <h2>Login</h2>
-    <form action="ggg.php" method="POST">
-        <label for="customer-number">Customer Number:</label>
-        <input type="text" id="customer-number" name="customer-number" required>
+        <h1 class="header">Gosselin Gourmet Goods</h1>
+        <h2>Login</h2>
+        <form action="GosselinGourmetCoffee.php" method="POST">
+            <label for="customerNumber">Customer Number:</label>
+            <input type="text" id="customerNumber" name="customerNumber" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
 
-        <button type="submit">Login</button>
-    </form>
-    <p class="footer">If you do not have an account, <a href="register.php">register here</a>.</p>
-</div>
-
+            <button type="submit">Login</button>
+        </form>
+        <p class="footer">If you do not have an account, <a href="register.php">register here</a>.</p>
+    </div>
 </body>
 </html>
