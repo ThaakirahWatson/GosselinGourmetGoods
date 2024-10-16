@@ -40,6 +40,8 @@ if (class_exists("OnlineStore")) {
     $Store->getProductList();
     $_SESSION['currentStore'] = serialize($Store);
     ?>
+
+<a href="showCart.php">Show Shopping Cart</a>
 </body>
 
 </html>

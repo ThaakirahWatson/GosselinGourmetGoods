@@ -8,12 +8,61 @@ class OnlineStore {
     function __construct() {
         include("inc_OnlineStoreDB.php");
         $this->DBConnect = $DBConnect;
+        $this->createTables(); // Call the method to create tables when the class is instantiated
     }
 
     function __destruct() {
-        if (!$this->DBConnect->connect_error)
+        if (!$this->DBConnect->connect_error) {
             $this->DBConnect->close();
+        }
     }
+
+    private function createTables() {
+        // Create the users table if it doesn't exist
+        $createUsersTableQuery = "
+            CREATE TABLE IF NOT EXISTS users (
+                customerNumber INT AUTO_INCREMENT PRIMARY KEY,
+                password VARCHAR(255) NOT NULL
+            )";
+        
+        if ($this->DBConnect->query($createUsersTableQuery) === FALSE) {
+            echo "Error creating users table: " . $this->DBConnect->error;
+        }
+    }
+
+    public function register($customerNumber, $password) {
+        $SQLString = "INSERT INTO users (customerNumber, password) VALUES (?, ?)";
+        $stmt = $this->DBConnect->prepare($SQLString);
+        $stmt->bind_param("is", $customerNumber, $password);
+        if ($stmt->execute()) {
+            echo "User registered successfully.";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+    }
+
+    public function login($customerNumber, $password) {
+        $SQLString = "SELECT * FROM users WHERE customerNumber = ?";
+        $stmt = $this->DBConnect->prepare($SQLString);
+        $stmt->bind_param("i", $customerNumber);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            $user = $result->fetch_assoc();
+            if ($password === $user['password']) {
+                session_start();
+                $_SESSION['user_id'] = $user['customerNumber'];
+                header("Location: class_OnlineStore.php");
+                exit();
+            } else {
+                echo "Invalid password.";
+            }
+        } else {
+            echo "User not found.";
+        }
+    }
+
 
     public function setStoreID($storeID) {
         if ($this->storeID != $storeID) {
@@ -53,39 +102,6 @@ class OnlineStore {
             }
         }
         return $retval;
-    }
-
-    // Method to register a new user
-    public function register($customerNumber, $password) {
-        // Hash the password for security
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-        // Insert the new user into the database
-        $SQLString = "INSERT INTO users (customerNumber, password) VALUES ('$customerNumber', '$hashedPassword')";
-        if ($this->DBConnect->query($SQLString) === TRUE) {
-            return "Registration successful!";
-        } else {
-            return "Error: " . $this->DBConnect->error;
-        }
-    }
-
-    // Method to log in a user
-    public function login($customerNumber, $password) {
-        // Retrieve the user record from the database
-        $SQLString = "SELECT * FROM users WHERE customerNumber = '$customerNumber'";
-        $QueryResult = @$this->DBConnect->query($SQLString);
-        
-        if ($QueryResult && $QueryResult->num_rows > 0) {
-            $user = $QueryResult->fetch_assoc();
-            // Verify the password against the hashed password in the database
-            if (password_verify($password, $user['password'])) {
-                return "Login successful!";
-            } else {
-                return "Invalid customerNumber or password.";
-            }
-        } else {
-            return "Invalid customerNumber or password.";
-        }
     }
 
     public function getProductList() {

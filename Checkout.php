@@ -21,8 +21,7 @@ if (class_exists("OnlineStore")) {
 
 <head>
     <title><?php echo $storeInfo['name']; ?> Checkout</title>
-    <link rel="stylesheet" type="text/css" href="<?php echo
-                                                    $storeInfo['css_file']; ?>" />
+    <link rel="stylesheet" type="text/css" href="home.css" />
 </head>
 
 <body>

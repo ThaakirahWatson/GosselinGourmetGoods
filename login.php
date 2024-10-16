@@ -1,22 +1,26 @@
 <?php
-session_start();
-require_once("class_OnlineStore.php");
+// Include the OnlineStore class file
+include("class_OnlineStore.php");
 
-// Process the login form submission
+function __construct() {
+    include("inc_OnlineStoreDB.php");
+    $this->DBConnect = $DBConnect;
+    $this->createTables(); // Call the method to create tables when the class is instantiated
+}
+
+// Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get the customer number and password from the form input
     $customerNumber = $_POST['customerNumber'];
     $password = $_POST['password'];
 
-    // Call the login method
-    $message = $onlineStore->loginUser($customerNumber, $password);
-    if ($message) {
-        echo $message; // Display error message if login fails
-    }
+    // Call the login method to log in the user
+    $onlineStore->login($customerNumber, $password);
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,10 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Login - Gosselin Gourmet Goods</title>
 </head>
 <body>
-    <div class="flex-container">
+<div class="flex-container">
         <h1 class="header">Gosselin Gourmet Goods</h1>
         <h2>Login</h2>
-        <form action="GosselinGourmetCoffee.php" method="POST">
+        <form action="home.php" method="POST">
             <label for="customerNumber">Customer Number:</label>
             <input type="text" id="customerNumber" name="customerNumber" required>
 

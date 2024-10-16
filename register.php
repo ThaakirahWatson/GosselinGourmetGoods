@@ -1,25 +1,24 @@
 <?php
-session_start();
-require_once("class_OnlineStore.php");
+// Include the OnlineStore class file
+include("class_OnlineStore.php");
 
-// Process the registration form submission
+function __construct() {
+    include("inc_OnlineStoreDB.php");
+    $this->DBConnect = $DBConnect;
+    $this->createTables(); // Call the method to create tables when the class is instantiated
+}
+
+// Instantiate the OnlineStore class
+$onlineStore = new OnlineStore();
+
+// Check if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $fullName = $_POST['fullName'];
-    $email = $_POST['email'];
+    // Get the customer number and password from the form input
     $customerNumber = $_POST['customerNumber'];
     $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmPassword'];
 
-    // Check if passwords match
-    if ($password !== $confirmPassword) {
-        echo "<p>Passwords do not match. Please try again.</p>";
-    } else {
-        // Call the registration method
-        $message = $onlineStore->registerUser($fullName, $email, $customerNumber, $password);
-        if ($message) {
-            echo $message; // Display message based on registration success or failure
-        }
-    }
+    // Call the register method to register the user
+    $onlineStore->register($customerNumber, $password);
 }
 ?>
 
@@ -33,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Register - Gosselin Gourmet Goods</title>
 </head>
 <body>
-    <div class="container">
+<div class="container">
         <h1>Gosselin Gourmet Goods</h1>
         <h2>Register</h2>
         <form action="login.php" method="POST">

@@ -20,16 +20,16 @@ if (class_exists("OnlineStore")) {
     <title>Gosselin Gourmet Goods</title>
     <meta http-equiv="content-type"
         content="text/html; charset=iso-8859-1" />
-    <link rel="stylesheet" href="<?php echo $storeInfo['css_file']; ?>" />
+    <link rel="stylesheet" href="home.css" />
 </head>
 
 <body>
-    <h1>Gosselin Gourmet</h1>
-    <h2>Shop by Category</h2>
+    <!--<h1>Gosselin Gourmet</h1>-->
+    <!--<h2>Shop by Category</h2>-->
     <?php
-    echo "<p><a href='GosselinGourmetCoffee.php?PHPSESSID=" . session_id() . "'>Gourmet Coffees</a></p>\n";
-    echo "<p><a href='ElectronicsBoutique.php?PHPSESSID=" . session_id() . "'>Electronics Boutique</a></p>\n";
-    echo "<p><a href='OldTymeAntiques.php?PHPSESSID=" . session_id() . "'>Antiques</a></p>\n";
+    //echo "<p><a href='GosselinGourmetCoffee.php?PHPSESSID=" . session_id() . "'>Gourmet Coffees</a></p>\n";
+    //echo "<p><a href='ElectronicsBoutique.php?PHPSESSID=" . session_id() . "'>Electronics Boutique</a></p>\n";
+    //echo "<p><a href='OldTymeAntiques.php?PHPSESSID=" . session_id() . "'>Antiques</a></p>\n";
     echo "<h2>Shopping Cart</h2>\n";
     //Unpack back to an object and store in $Cart
     //$Cart = unserialize($_SESSION['curCart']);
