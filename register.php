@@ -4,8 +4,6 @@ include("class_OnlineStore.php");
 
 function __construct() {
     include("inc_OnlineStoreDB.php");
-    $this->DBConnect = $DBConnect;
-    $this->createTables(); // Call the method to create tables when the class is instantiated
 }
 
 // Instantiate the OnlineStore class
@@ -24,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="GosselinGourmetStyle.css">
     <title>Register - Gosselin Gourmet Goods</title>
 </head>
+
 <body>
-<div class="container">
+    <div class="container">
         <h1>Gosselin Gourmet Goods</h1>
         <h2>Register</h2>
         <form action="login.php" method="POST">
@@ -56,4 +56,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="footer">Already have an account? <a href="login.php">Login here.</a></p>
     </div>
 </body>
+
 </html>
