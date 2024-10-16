@@ -39,5 +39,8 @@ function __construct() {
             <img src="images/electronic.jpeg" alt="Electronics Boutique" class="store-image">
         </div>
     </div>
+    <div class="logout-container">
+        <a href="logout.php" class="logout-button">Logout</a>
+    </div>
 </body>
 </html>

@@ -5,7 +5,7 @@ body {
     color: #333; /* Dark grey text for readability */
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
 }
 
 /* Style the main heading */
@@ -124,4 +124,48 @@ td {
     text-align: right;
     font-family: monotype;
     font-style: normal; 
+}
+
+/* Centered Logout Button */
+.logout-container {
+    text-align: center; /* Center text */
+    margin-top: 30px; /* Space above the button */
+}
+
+/* Logout button styling */
+.logout-button {
+    display: inline-block; /* Make it a block element for padding */
+    text-align: center;
+    background-color: #d9534f; /* Bootstrap danger color for logout */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Hover effect for the logout button */
+.logout-button:hover {
+    background-color: #c9302c; /* Darker red on hover */
+}
+
+/* Centered Login Button */
+.login-container {
+    text-align: center; /* Center text */
+    margin-top: 30px; /* Space above the button */
+}
+
+/* Login button styling */
+.login-button {
+    display: inline-block; /* Make it a block element for padding */
+    text-align: center;
+    background-color: #5bc0de; /* Bootstrap info color for login */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove underline */
+}
+
+/* Hover effect for the login button */
+.login-button:hover {
+    background-color: #31b0d5; /* Darker blue on hover */
 }
