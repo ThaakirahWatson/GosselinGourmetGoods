@@ -1,9 +1,16 @@
 <?php
-// Include the OnlineStore class file
-include("class_OnlineStore.php");
+session_start();
+require_once("class_OnlineStore.php");
+if (class_exists("OnlineStore")) {
+    if (isset($_SESSION['currentStore'])) {
+        $Store = unserialize($_SESSION['currentStore']);
+    } else {
+        $Store = new OnlineStore();
+    }
+} else {
 
-function __construct() {
-    include("inc_OnlineStoreDB.php");
+    $ErrorMsgs[] = "The OnlineStore class is not available!";
+    $Store = NULL;
 }
 
 // Check if the form has been submitted
@@ -13,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Call the login method to log in the user
-    $onlineStore->login($customerNumber, $password);
+    $errorMessage = $Store->login($customerNumber, $password);
 }
 ?>
 
@@ -32,7 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="flex-container">
         <h1 class="header">Gosselin Gourmet Goods</h1>
         <h2>Login</h2>
-        <form action="home.php" method="POST">
+        <?php if (!empty($errorMessage)) { ?>
+            <p style="color: red;"><?php echo $errorMessage; ?></p>
+        <?php } ?>
+        <form action="login.php" method="POST">
             <label for="customerNumber">Customer Number:</label>
             <input type="text" id="customerNumber" name="customerNumber" required>
 
