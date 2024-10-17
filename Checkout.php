@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once("class_OnlineStore.php");
-$storeID = $_GET['CheckOut'];
+$storeID = $_SESSION['CheckOut'];
 $storeInfo = array();
 if (class_exists("OnlineStore")) {
     if (isset($_SESSION['currentStore']))
@@ -25,10 +25,15 @@ if (class_exists("OnlineStore")) {
 </head>
 
 <body>
-    <h1><?php echo htmlentities($storeInfo['name']); ?></h1>
+    <h1><?php echo ($storeInfo['name']); ?></h1>
     <h2>Checkout</h2>
     <?php
-    $Store->checkout();
+    if (isset($_SESSION['user_id'])) { // Check if user is logged in
+        $Store->checkout();
+    } else {
+        echo "<p>You need to be logged in to checkout.</p>";
+        echo "<p><a href='login.php'>Login</a></p>";
+    }
     ?>
 </body>
 
