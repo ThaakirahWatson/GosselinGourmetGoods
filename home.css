@@ -1,175 +1,181 @@
 /* home.css */
 
 body {
-    background-image: url('images/background.jpeg'); /* Path to your image */
-    background-size: cover; /* Ensure the image covers the entire background */
-    background-position: center; /* Center the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-    background-attachment: fixed; /* Make the background stay in place when scrolling */
-    color: #333; /* Dark grey text for readability */
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
+  background-image: url("images/background.jpeg"); /* Path to your image */
+  background-size: cover; /* Ensure the image covers the entire background */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed; /* Make the background stay in place when scrolling */
+  color: #333; /* Dark grey text for readability */
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
 }
 
 /* Style the main heading */
 h1 {
-    color: #444; /* Slightly darker grey to make the heading stand out */
-    text-align: center;
-    margin-bottom: 10px;
+  color: #954141; /* Slightly darker grey to make the heading stand out */
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 /* Style the welcome message */
 p {
-    text-align: center;
-    font-size: 18px;
+  text-align: center;
+  font-size: 18px;
 }
 
 /* Style the section heading for the stores */
 h2 {
-    color: #666; /* Medium grey to differentiate it from the main heading */
-    text-align: center;
-    margin-top: 20px;
+  color: #666; /* Medium grey to differentiate it from the main heading */
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Container for the list of stores */
 .store-list {
-    display: flex;
-    justify-content: center; /* Center the stores horizontally */
-    gap: 30px; /* Space between the store items */
-    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
-    margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Center the stores horizontally */
+  gap: 30px; /* Space between the store items */
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  margin-top: 20px;
 }
 
 /* Individual store item styling */
 .store-item {
-    background-color: #e0e0e0; /* Light grey background for store boxes */
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    width: 200px;
+  background-color: #e0e0e0; /* Light grey background for store boxes */
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  width: 200px;
 }
 
 /* Store link styling */
 .store-item a {
-    text-decoration: none; /* Remove underline from links */
-    color: #555; /* Neutral grey color for the links */
-    display: block;
-    font-weight: bold;
-    margin-bottom: 8px;
+  text-decoration: none; /* Remove underline from links */
+  color: #555; /* Neutral grey color for the links */
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
 /* Store description styling */
 .store-description {
-    font-size: 14px;
-    color: #777; /* Slightly lighter grey for description */
-    margin: 0;
+  font-size: 14px;
+  color: #777; /* Slightly lighter grey for description */
+  margin: 0;
 }
 
 .store-image {
-    width: 200px; /* Set a fixed width */
-    height: 150px; /* Set a fixed height */
-    object-fit: cover; /* Ensure images cover the space without stretching */
-    border-radius: 5px; /* Slightly rounded corners for images */
-    margin-top: 10px; /* Space above images */
+  width: 200px; /* Set a fixed width */
+  height: 150px; /* Set a fixed height */
+  object-fit: cover; /* Ensure images cover the space without stretching */
+  border-radius: 5px; /* Slightly rounded corners for images */
+  margin-top: 10px; /* Space above images */
 }
 
 /* Style for the container */
 .container {
-    text-align: center; /* Center text */
-    margin-top: 50px; /* Margin at the top */
+  text-align: center; /* Center text */
+  margin-top: 50px; /* Margin at the top */
 }
 
 /* Continue shopping link styling */
 .continue-shopping {
-    display: inline-block; /* Make it a block element for padding */
-    text-align: center;
-    background-color: #4CAF50; /* Green background color */
-    color: white; /* White text color */
-    padding: 10px 20px; /* Padding around the text */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
-    margin-top: 20px; /* Space above the button */
+  display: inline-block; /* Make it a block element for padding */
+  text-align: center;
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
+  margin-top: 20px; /* Space above the button */
 }
 
 /* Hover effect for the link */
 .continue-shopping:hover {
-    background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049; /* Darker green on hover */
 }
 
-h1, h2, th, td {
-    color: #403010;
+h1,
+h2,
+th,
+td {
+  color: #403010;
 }
 
-h1, h2, th {
-    text-align: center; 
-    font-weight: bold; 
+h1,
+h2,
+th {
+  text-align: center;
+  font-weight: bold;
 }
 
 table {
-    width: 100%; /* Set the width of the table */
-    border-collapse: collapse; /* Collapse borders for a cleaner look */
-    padding: 10px; 
-    margin: 10px; 
-    vertical-align: top;
-    border: 2px solid #403010; /* Outline for the entire table */
+  width: 100%; /* Set the width of the table */
+  border-collapse: collapse; /* Collapse borders for a cleaner look */
+  padding: 10px;
+  margin: 10px;
+  vertical-align: top;
+  border: 2px solid #403010; /* Outline for the entire table */
 }
 
-th, td {
-    border: 1px solid #403010; /* Border for each cell */
-    padding: 8px; /* Padding within each cell */
+th,
+td {
+  border: 1px solid #403010; /* Border for each cell */
+  padding: 8px; /* Padding within each cell */
 }
 
 td {
-    vertical-align: top;
+  vertical-align: top;
 }
 
 .currency {
-    text-align: right;
-    font-family: monotype;
-    font-style: normal; 
+  text-align: right;
+  font-family: monotype;
+  font-style: normal;
 }
 
 /* Centered Logout Button */
 .logout-container {
-    text-align: center; /* Center text */
-    margin-top: 30px; /* Space above the button */
+  text-align: center; /* Center text */
+  margin-top: 30px; /* Space above the button */
 }
 
 /* Logout button styling */
 .logout-button {
-    display: inline-block; /* Make it a block element for padding */
-    text-align: center;
-    background-color: #d9534f; /* Bootstrap danger color for logout */
-    color: white; /* White text color */
-    padding: 10px 20px; /* Padding around the text */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
+  display: inline-block; /* Make it a block element for padding */
+  text-align: center;
+  background-color: #d9534f; /* Bootstrap danger color for logout */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
 }
 
 /* Hover effect for the logout button */
 .logout-button:hover {
-    background-color: #c9302c; /* Darker red on hover */
+  background-color: #c9302c; /* Darker red on hover */
 }
 
 /* Centered Login Button */
 .login-container {
-    text-align: center; /* Center text */
-    margin-top: 30px; /* Space above the button */
+  text-align: center; /* Center text */
+  margin-top: 30px; /* Space above the button */
 }
 
 /* Login button styling */
 .login-button {
-    display: inline-block; /* Make it a block element for padding */
-    text-align: center;
-    background-color: #5bc0de; /* Bootstrap info color for login */
-    color: white; /* White text color */
-    padding: 10px 20px; /* Padding around the text */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* Remove underline */
+  display: inline-block; /* Make it a block element for padding */
+  text-align: center;
+  background-color: #5bc0de; /* Bootstrap info color for login */
+  color: white; /* White text color */
+  padding: 10px 20px; /* Padding around the text */
+  border-radius: 5px; /* Rounded corners */
+  text-decoration: none; /* Remove underline */
 }
 
 /* Hover effect for the login button */
 .login-button:hover {
-    background-color: #31b0d5; /* Darker blue on hover */
+  background-color: #31b0d5; /* Darker blue on hover */
 }
