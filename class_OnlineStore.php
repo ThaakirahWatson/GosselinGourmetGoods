@@ -141,8 +141,10 @@ class OnlineStore {
             echo "<td><a href='" . $_SERVER['SCRIPT_NAME'] . "?PHPSESSID=" . session_id() . "&EmptyCart=TRUE'>Empty " .
                 " Cart</a></td></tr>\n";
             echo "</table>";
-            echo "<p><a href='Checkout.php?PHPSESSID=" .
-                session_id() . "&CheckOut=$storeID'>Checkout</a></p>\n";
+            // echo "<p><a href='Checkout.php?PHPSESSID=" .
+            //     session_id() . "&CheckOut=$storeID'>Checkout</a></p>\n";
+            $_SESSION['CheckOut'] = $storeID;
+
 
             $retval = TRUE;
         }
@@ -246,14 +248,65 @@ class OnlineStore {
     //and inserts it into the database
     public function checkout() {
         $ProductsOrdered = 0;
-        foreach ($this->shoppingCart as $quantity) { // Removed $productID from the foreach loop
+        $orderID = session_id(); // Generate a unique order ID
+
+        // 1. Insert the order into the 'orders' table
+        $SQLString = "INSERT INTO orders (orderID) VALUES (?)";
+        $stmt = $this->DBConnect->prepare($SQLString);
+        $stmt->bind_param("s", $orderID);
+        if (!$stmt->execute()) {
+            die("Error inserting order: " . $stmt->error);
+        }
+
+        // 2. Get the customerID from the session
+        $customerID = $_SESSION['user_id'];
+
+        // 3. Fetch customer details (customerName, customerNumber)
+        $SQLString = "SELECT customerName, customerNumber FROM users WHERE customerNumber = ?";
+        $stmt = $this->DBConnect->prepare($SQLString);
+        $stmt->bind_param("i", $customerID);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $customer = $result->fetch_assoc();
+
+        // 4. Insert the order details into the 'orderLine' table and display order details
+        echo "<h2>Order Details</h2>";
+        echo "<p><strong>Customer Name:</strong> " . $customer['customerName'] . "</p>";
+        echo "<p><strong>Customer Number:</strong> " . $customer['customerNumber'] . "</p>";
+        echo "<p><strong>Order ID:</strong> " . $orderID . "</p>";
+        echo "<ul>"; // Start an unordered list for product details
+
+        foreach ($this->shoppingCart as $productID => $quantity) {
             if ($quantity > 0) {
                 ++$ProductsOrdered;
-                // Updated SQL to only insert orderID and quantity, removing productID
-                $SQLString = "INSERT INTO orders (orderID, quantity) VALUES ('" . session_id() . "', '" . $quantity . "')";
-                $QueryResult = $this->DBConnect->query($SQLString);
+
+                // Fetch product description from inventory
+                $SQLString = "SELECT description FROM inventory WHERE productID = ?";
+                $stmt = $this->DBConnect->prepare($SQLString);
+                $stmt->bind_param("i", $productID);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $product = $result->fetch_assoc();
+
+                // Display order details for each product
+                echo "<li>";
+                echo "<strong>Product ID:</strong> " . $productID . ", ";
+                echo "<strong>Description:</strong> " . $product['description'] . ", ";
+                echo "<strong>Quantity:</strong> " . $quantity;
+                echo "</li>";
+
+                $SQLString = "INSERT INTO orderLine (orderID, productID, quantity) 
+                              VALUES (?, ?, ?)";
+                $stmt = $this->DBConnect->prepare($SQLString);
+                $stmt->bind_param("sii", $orderID, $productID, $quantity);
+                if (!$stmt->execute()) {
+                    die("Error inserting order line: " . $stmt->error);
+                }
             }
         }
+
+        echo "</ul>"; // End the unordered list
+
         echo "<p><strong>Your order has been recorded</strong></p>\n";
     }
 }
