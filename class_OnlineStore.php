@@ -8,7 +8,7 @@ class OnlineStore {
     function __construct() {
         include("inc_OnlineStoreDB.php");
         $this->DBConnect = $DBConnect;
-        $this->createTables(); // Call the method to create tables when the class is instantiated
+        // $this->createTables(); // Call the method to create tables when the class is instantiated
     }
 
     function __destruct() {
@@ -17,24 +17,16 @@ class OnlineStore {
         }
     }
 
-    private function createTables() {
-        // Create the users table if it doesn't exist
-        $createUsersTableQuery = "
-            CREATE TABLE IF NOT EXISTS users (
-                customerNumber INT AUTO_INCREMENT PRIMARY KEY,
-                password VARCHAR(255) NOT NULL
-            )";
-        
-        if ($this->DBConnect->query($createUsersTableQuery) === FALSE) {
-            echo "Error creating users table: " . $this->DBConnect->error;
-        }
-    }
+    //  
 
-    public function register($customerNumber, $password) {
-        $SQLString = "INSERT INTO users (customerNumber, password) VALUES (?, ?)";
+    public function register($customerNumber, $password, $customerName, $customerEmail) {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $SQLString = "INSERT INTO users (customerNumber, password, customerName, customerEmail) VALUES (?, ?, ?, ?)";
         $stmt = $this->DBConnect->prepare($SQLString);
-        $stmt->bind_param("is", $customerNumber, $password);
+        $stmt->bind_param("isss", $customerNumber, $hashedPassword, $customerName, $customerEmail);
         if ($stmt->execute()) {
+            header("Location: login.php");
+
             echo "User registered successfully.";
         } else {
             echo "Error: " . $stmt->error;
@@ -47,19 +39,19 @@ class OnlineStore {
         $stmt->bind_param("i", $customerNumber);
         $stmt->execute();
         $result = $stmt->get_result();
-        
+
         if ($result->num_rows > 0) {
             $user = $result->fetch_assoc();
-            if ($password === $user['password']) {
+            if (password_verify($password, $user['password'])) {
                 session_start();
                 $_SESSION['user_id'] = $user['customerNumber'];
-                header("Location: class_OnlineStore.php");
+                header("Location: home.php");
                 exit();
             } else {
-                echo "Invalid password.";
+                return "Invalid Customer Number or Password.";
             }
         } else {
-            echo "User not found.";
+            return "Invalid Customer Number or Password.";
         }
     }
 

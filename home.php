@@ -4,20 +4,20 @@ include("class_OnlineStore.php");
 
 function __construct() {
     include("inc_OnlineStoreDB.php");
-    $this->DBConnect = $DBConnect;
-    $this->createTables(); // Call the method to create tables when the class is instantiated
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Store</title>
-    <link rel="stylesheet" href="home.css"> 
+    <link rel="stylesheet" href="home.css">
 </head>
+
 <body>
     <h1>Online Store</h1>
     <p>Welcome!</p>
@@ -43,4 +43,5 @@ function __construct() {
         <a href="logout.php" class="logout-button">Logout</a>
     </div>
 </body>
+
 </html>

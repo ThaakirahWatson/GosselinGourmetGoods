@@ -4,8 +4,6 @@ include("class_OnlineStore.php");
 
 function __construct() {
     include("inc_OnlineStoreDB.php");
-    $this->DBConnect = $DBConnect;
-    $this->createTables(); // Call the method to create tables when the class is instantiated
 }
 
 // Check if the form has been submitted
@@ -21,12 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logout</title>
-    <link rel="stylesheet" type="text/css" href="home.css" /> 
+    <link rel="stylesheet" type="text/css" href="home.css" />
 </head>
+
 <body>
 
     <h1>Logout Successful</h1>
@@ -39,4 +39,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
 </body>
+
 </html>

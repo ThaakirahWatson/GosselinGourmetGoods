@@ -4,19 +4,19 @@ include("class_OnlineStore.php");
 
 function __construct() {
     include("inc_OnlineStoreDB.php");
-    $this->DBConnect = $DBConnect;
-    $this->createTables(); // Call the method to create tables when the class is instantiated
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Cancelled</title>
     <link rel="stylesheet" href="home.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Your Order Has Been Cancelled</h1>
@@ -24,4 +24,5 @@ function __construct() {
         <a href="home.php" class="continue-shopping">Continue Shopping</a>
     </div>
 </body>
+
 </html>
