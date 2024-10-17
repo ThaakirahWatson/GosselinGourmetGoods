@@ -246,13 +246,11 @@ class OnlineStore {
     //and inserts it into the database
     public function checkout() {
         $ProductsOrdered = 0;
-        foreach ($this->shoppingCart as $productID => $quantity) {
+        foreach ($this->shoppingCart as $quantity) { // Removed $productID from the foreach loop
             if ($quantity > 0) {
                 ++$ProductsOrdered;
-                $SQLString = "INSERT INTO orders " .
-                    " (orderID, productId, quantity) " .
-                    "VALUES('" . session_id() . "'," .
-                    "'$productID', $quantity)";
+                // Updated SQL to only insert orderID and quantity, removing productID
+                $SQLString = "INSERT INTO orders (orderID, quantity) VALUES ('" . session_id() . "', '" . $quantity . "')";
                 $QueryResult = $this->DBConnect->query($SQLString);
             }
         }
